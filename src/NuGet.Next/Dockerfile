@@ -4,12 +4,15 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM node as lobe
+FROM node:22-alpine as lobe
+RUN npm config set registry https://registry.npmmirror.com \
+    && npm install -g pnpm \
+    && pnpm config set registry https://registry.npmmirror.com
+
 WORKDIR /src
 COPY web .
-RUN yarn
-RUN npm i
-RUN yarn run build
+RUN pnpm i
+RUN pnpm run build
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release

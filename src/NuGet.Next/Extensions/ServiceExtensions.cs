@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NuGet.Next.Core;
 using NuGet.Next.DM;
-using NuGet.Next.MySql;
+//using NuGet.Next.MySql;
 using NuGet.Next.Options;
 using NuGet.Next.PostgreSql;
 using NuGet.Next.SqlServer;
@@ -38,10 +38,10 @@ public static class ServiceExtensions
             {
                 application.AddSqliteDatabase();
             }
-            else if (option.Database.Type.Equals("MySql", StringComparison.OrdinalIgnoreCase))
-            {
-                application.AddMySqlDatabase();
-            }
+            //else if (option.Database.Type.Equals("MySql", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    application.AddMySqlDatabase();
+            //}
             else if (option.Database.Type.Equals("SqlServer", StringComparison.OrdinalIgnoreCase))
             {
                 application.AddSqlServerDatabase();

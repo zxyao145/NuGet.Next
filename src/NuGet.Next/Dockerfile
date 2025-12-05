@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 USER root
 WORKDIR /app
 EXPOSE 8080
@@ -14,9 +14,11 @@ COPY web .
 RUN pnpm i
 RUN pnpm run build
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Packages.props", "."]
+COPY ["Directory.Build.props", "."]
 COPY ["src/NuGet.Next/NuGet.Next.csproj", "src/NuGet.Next/"]
 COPY ["src/NuGet.Next.Core/NuGet.Next.Core.csproj", "src/NuGet.Next.Core/"]
 COPY ["src/NuGet.Next.Protocol/NuGet.Next.Protocol.csproj", "src/NuGet.Next.Protocol/"]

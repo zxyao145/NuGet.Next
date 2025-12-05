@@ -9,12 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup Condition="'$(DOTNET_RUNNING_IN_CONTAINER)' == ''">
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
     </ItemGroup>
 
     <PropertyGroup>
-        <MicrosoftEntityFrameworkCorePackageVersion>8.0.0</MicrosoftEntityFrameworkCorePackageVersion>
-        <NuGetPackageVersion>5.10.0</NuGetPackageVersion>
-        <MicrosoftExtensionsPackageVersion>8.0.0</MicrosoftExtensionsPackageVersion>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		
     </PropertyGroup>
 </Project>

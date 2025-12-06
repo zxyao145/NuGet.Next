@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NuGet.Next.Protocol\NuGet.Next.Protocol.csproj"/>
+        <ProjectReference Include="..\NuGet.Next.Protocol\NuGet.Next.Protocol.csproj" />
     </ItemGroup>
 
 </Project>

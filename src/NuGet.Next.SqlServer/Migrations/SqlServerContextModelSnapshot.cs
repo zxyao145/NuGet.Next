@@ -17,7 +17,7 @@ namespace BaGet.Database.SqlServer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -322,19 +322,6 @@ namespace BaGet.Database.SqlServer.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1c83c5c5-1b06-43a1-97a8-b1fd131a8ee6",
-                            Avatar = "https://avatars.githubusercontent.com/u/61819790?v=4",
-                            Email = "239573049@qq.com",
-                            FullName = "token",
-                            Password = "0a5e25b72026206b454ee76db49847e1",
-                            PasswordHash = "1cf44bc30d9e45999250415301693235",
-                            Role = "admin",
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("NuGet.Next.Core.UserKey", b =>
@@ -365,16 +352,6 @@ namespace BaGet.Database.SqlServer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserKeys");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "4886cfd3e4b74a96a29b214366602252",
-                            CreatedTime = new DateTimeOffset(new DateTime(2024, 11, 2, 22, 46, 4, 485, DateTimeKind.Unspecified).AddTicks(6718), new TimeSpan(0, 8, 0, 0, 0)),
-                            Enabled = true,
-                            Key = "key-520d78f73e454beea64c336a00af919a",
-                            UserId = "1c83c5c5-1b06-43a1-97a8-b1fd131a8ee6"
-                        });
                 });
 
             modelBuilder.Entity("NuGet.Next.Core.PackageDependency", b =>

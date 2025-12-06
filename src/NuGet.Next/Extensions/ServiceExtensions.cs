@@ -9,6 +9,7 @@ using NuGet.Next.DM;
 using NuGet.Next.Options;
 using NuGet.Next.PostgreSql;
 using NuGet.Next.SqlServer;
+using NuGet.Next.Data;
 
 namespace NuGet.Next.Extensions;
 
@@ -54,6 +55,8 @@ public static class ServiceExtensions
             {
                 throw new NotSupportedException($"Database type '{option.Database.Type}' is not supported.");
             }
+
+            application.Services.AddTransient<DbSeeder>();
         });
 
         // You can swap between implementations of subsystems like storage and search using BaGet's configuration.

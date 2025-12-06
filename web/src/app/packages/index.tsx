@@ -125,6 +125,11 @@ const Packages = memo(() => {
                                     label: ".NET 9",
                                     title: ".NET 9",
                                     value: "net9.0"
+                                },
+                                {
+                                    label: ".NET 10",
+                                    title: ".NET 10",
+                                    value: "net10.0"
                                 }
                             ]
                         },

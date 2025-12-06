@@ -25,7 +25,7 @@ public abstract class AbstractContext<TContext> : DbContext, IContext where TCon
     public AbstractContext(DbContextOptions<TContext> options, IServiceProvider serviceProvider)
         : base(options)
     {
-        _userContext = serviceProvider.GetService<IUserContext>();
+        _userContext = serviceProvider.GetRequiredService<IUserContext>();
     }
 
     public DbSet<PackageDependency> PackageDependencies { get; set; }
@@ -107,30 +107,6 @@ public abstract class AbstractContext<TContext> : DbContext, IContext where TCon
             option.HasIndex(x => x.UserId);
         });
 
-        InitSeedData(builder);
-    }
-
-    /// <summary>
-    /// 初始化种子数据
-    /// </summary>
-    private void InitSeedData(ModelBuilder builder)
-    {
-        var user = new User
-        {
-            Id = Guid.NewGuid().ToString(),
-            Username = "admin",
-            Email = "239573049@qq.com",
-            Role = RoleConstant.Admin,
-            Avatar = "https://avatars.githubusercontent.com/u/61819790?v=4",
-            FullName = "token",
-        };
-        user.SetPassword("Aa123456.");
-
-        builder.Entity<User>().HasData(user);
-
-        var userKey = new UserKey(user.Id);
-
-        builder.Entity<UserKey>().HasData(userKey);
     }
 
     private void BuildPackageEntity(EntityTypeBuilder<Package> package)

@@ -17,7 +17,7 @@ namespace BaGet.Database.PostgreSql.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "citext");
@@ -323,19 +323,6 @@ namespace BaGet.Database.PostgreSql.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c1b0007d-5754-4d0b-ae24-e6e0c97c9ed9",
-                            Avatar = "https://avatars.githubusercontent.com/u/61819790?v=4",
-                            Email = "239573049@qq.com",
-                            FullName = "token",
-                            Password = "06e8fa784bc3b75087e223900d1be9ac",
-                            PasswordHash = "bdd18f8f7a964a99a0bee29bec16a040",
-                            Role = "admin",
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("NuGet.Next.Core.UserKey", b =>
@@ -366,16 +353,6 @@ namespace BaGet.Database.PostgreSql.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserKeys");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "d7ff7a0080ec40cf88708be89a7b2ee1",
-                            CreatedTime = new DateTimeOffset(new DateTime(2024, 11, 2, 22, 45, 32, 566, DateTimeKind.Unspecified).AddTicks(1016), new TimeSpan(0, 8, 0, 0, 0)),
-                            Enabled = true,
-                            Key = "key-c86d98a6ea42484ead484552fba0be00",
-                            UserId = "c1b0007d-5754-4d0b-ae24-e6e0c97c9ed9"
-                        });
                 });
 
             modelBuilder.Entity("NuGet.Next.Core.PackageDependency", b =>

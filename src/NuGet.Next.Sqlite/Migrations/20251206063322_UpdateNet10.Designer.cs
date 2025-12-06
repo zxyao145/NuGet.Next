@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NuGet.Next.Sqlite;
 
 #nullable disable
 
-namespace BaGet.Database.Sqlite.Migrations
+namespace NuGet.Next.Sqlite.Migrations
 {
     [DbContext(typeof(SqliteContext))]
-    partial class SqliteContextModelSnapshot : ModelSnapshot
+    [Migration("20251206063322_UpdateNet10")]
+    partial class UpdateNet10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");

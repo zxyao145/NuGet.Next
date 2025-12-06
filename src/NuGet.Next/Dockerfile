@@ -4,7 +4,7 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM node:22-alpine as lobe
+FROM node:22-alpine AS lobe
 RUN npm config set registry https://registry.npmmirror.com \
     && npm install -g pnpm \
     && pnpm config set registry https://registry.npmmirror.com

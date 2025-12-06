@@ -1,10 +1,11 @@
-using System.Runtime.InteropServices;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Features;
 using NuGet.Next;
 using NuGet.Next.Converters;
+using NuGet.Next.Data;
 using NuGet.Next.Extensions;
 using NuGet.Next.Service;
+using System.Runtime.InteropServices;
+using System.Text.Json.Serialization;
 
 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
@@ -98,4 +99,7 @@ app.UseEndpoints(endpoints =>
 
 app.MapApis();
 
+await app.Services.GetRequiredService<DbSeeder>().InitAsync();
+
 app.Run();
+

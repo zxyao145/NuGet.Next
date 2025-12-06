@@ -1,10 +1,10 @@
 import { memo, useState } from "react";
 import { message, Input, Button } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { GridShowcase } from "@lobehub/ui/awesome";
 import { useNavigate } from "react-router-dom";
 import { Authenticate } from "@/services/AuthenticationService";
 import { useUserStore } from "@/store/user";
+import { Eye, EyeOff } from "lucide-react";
 
 const LoginPage = memo(() => {
   const navigate = useNavigate();
@@ -92,7 +92,13 @@ const LoginPage = memo(() => {
               onPressEnter={async () => {
                 await handleLogin();
               }}
-              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              iconRender={(visible) =>
+                visible ? (
+                  <Eye size={16} color="#80b5ff" style={{ cursor: "pointer" }} />
+                ) : (
+                  <EyeOff size={16} color="#999" style={{ cursor: "pointer" }} />
+                )
+              }
             />
           </div>
           <div

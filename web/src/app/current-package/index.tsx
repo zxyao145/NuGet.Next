@@ -4,7 +4,7 @@ import Divider from "@lobehub/ui/es/Form/components/FormDivider";
 import { useCallback, useEffect, useState } from "react";
 import { Tag, Tooltip } from "@lobehub/ui";
 import { DeletePackage, PackageList } from "@/services/PackageService";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { CircleQuestionMark } from "lucide-react";
 
 const CurrentPackage = () => {
   const columns = [
@@ -105,7 +105,7 @@ const CurrentPackage = () => {
                 removeUser(item.id, item.version.version);
               }}
               description={`确认需要删除${item.id} 包吗?`}
-              icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+              icon={<CircleQuestionMark size={14} style={{ color: "red" }} />}
             >
               <Button
                 danger

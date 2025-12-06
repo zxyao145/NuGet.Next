@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { Form, Input, Button, message } from "antd";
-import { LockOutlined } from "@ant-design/icons";
 import { updatePassword } from "@/services/UserService";
+import { LockKeyhole } from "lucide-react";
 
 const ChangePassword = memo(() => {
   const [form] = Form.useForm();
@@ -30,7 +30,7 @@ const ChangePassword = memo(() => {
       <h2>更改密码</h2>
       <Form form={form} onFinish={onFinish}>
         <Form.Item name="currentPassword" rules={[{ required: true, message: "请输入当前密码" }]}>
-          <Input.Password prefix={<LockOutlined />} placeholder="当前密码" />
+          <Input.Password prefix={<LockKeyhole size={14} />} placeholder="当前密码" />
         </Form.Item>
         <Form.Item
           name="newPassword"
@@ -39,7 +39,7 @@ const ChangePassword = memo(() => {
             { min: 8, message: "密码长度至少为8位" },
           ]}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder="新密码" />
+          <Input.Password prefix={<LockKeyhole size={14} />} placeholder="新密码" />
         </Form.Item>
         <Form.Item
           name="confirmPassword"
@@ -56,7 +56,7 @@ const ChangePassword = memo(() => {
             }),
           ]}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder="确认新密码" />
+          <Input.Password prefix={<LockKeyhole size={14} />} placeholder="确认新密码" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={loading} block>

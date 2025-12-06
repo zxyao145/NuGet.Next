@@ -3,15 +3,8 @@ import { PackageDetailsState } from "@/types/package";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Spin, Result, Row, Col, Card, Tabs } from "antd";
-import {
-  DownloadOutlined,
-  HistoryOutlined,
-  GlobalOutlined,
-  GithubOutlined,
-  FileTextOutlined,
-  CloudDownloadOutlined,
-  GiftOutlined,
-} from "@ant-design/icons";
+import { CloudDownload, Download, FileText, Github, Globe, History, Gift } from "lucide-react";
+
 import { Image, Markdown, Snippet, Tag } from "@lobehub/ui";
 import { Flexbox } from "react-layout-kit";
 import "./index.css";
@@ -240,7 +233,7 @@ const PackageDetails = () => {
                                 <div>{pkg.description}</div>
                               </td>
                               <td>
-                                <DownloadOutlined />
+                                <Download />
                                 <span>{pkg.totalDownloads.toLocaleString()}</span>
                               </td>
                             </tr>
@@ -355,13 +348,13 @@ const PackageDetails = () => {
 
       <Col span={6}>
         <Card title="信息">
-          <ul>
+          <ul className="statistics">
             <li>
-              <HistoryOutlined /> 最后一次更新 {new Date(detail.lastUpdated).toLocaleDateString()}
+              <History size={14} /> 最后一次更新 {new Date(detail.lastUpdated).toLocaleDateString()}
             </li>
             {detail.package.projectUrlString && (
               <li>
-                <GlobalOutlined />{" "}
+                <Globe size={14} />{" "}
                 <a href={detail.package.projectUrlString} target="_blank" rel="noopener noreferrer">
                   Project URL
                 </a>
@@ -369,7 +362,7 @@ const PackageDetails = () => {
             )}
             {detail.package.repositoryUrlString && (
               <li>
-                <GithubOutlined />{" "}
+                <Github size={14} />{" "}
                 <a
                   href={detail.package.repositoryUrlString}
                   target="_blank"
@@ -381,14 +374,14 @@ const PackageDetails = () => {
             )}
             {detail.licenseUrl && (
               <li>
-                <FileTextOutlined />{" "}
+                <FileText size={14} />{" "}
                 <a href={detail.licenseUrl} target="_blank" rel="noopener noreferrer">
                   License
                 </a>
               </li>
             )}
             <li>
-              <CloudDownloadOutlined />{" "}
+              <CloudDownload size={14} />{" "}
               <a
                 href={
                   detail.packageDownloadUrl ??
@@ -429,12 +422,12 @@ const PackageDetails = () => {
           }}
           title="统计数据"
         >
-          <ul>
+          <ul className="statistics">
             <li>
-              <DownloadOutlined /> {detail.totalDownloads.toLocaleString()} 下载总数
+              <Download size={14} /> {detail.totalDownloads.toLocaleString()} 下载总数
             </li>
             <li>
-              <GiftOutlined /> {detail.package.downloads.toLocaleString()} 本版本下载总数
+              <Gift size={14} /> {detail.package.downloads.toLocaleString()} 本版本下载总数
             </li>
           </ul>
         </Card>

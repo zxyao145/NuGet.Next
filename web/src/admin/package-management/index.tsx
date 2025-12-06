@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Input, Tag, Tooltip } from "@lobehub/ui";
 import { DeletePackage, PackageList } from "@/services/PackageService";
 import UserSelect from "@/features/User/UserSelect";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { CircleQuestionMark } from "lucide-react";
 
 interface ItemProps {
   id: string;
@@ -111,7 +111,7 @@ const PackageManagementPage = () => {
                 removeUser(item.id, item.version.version);
               }}
               description={`确认需要删除${item.id} 包吗?`}
-              icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+              icon={<CircleQuestionMark size={14} style={{ color: "red", marginRight: 8 }} />}
             >
               <Button
                 danger

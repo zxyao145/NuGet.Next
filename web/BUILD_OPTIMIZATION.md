@@ -19,7 +19,7 @@ The following improvements have been made to significantly speed up frontend com
 ### 3. **Smart Chunk Splitting**
 - Manual chunk splitting for better browser caching:
   - `react-vendor`: React ecosystem (react, react-dom, react-router-dom)
-  - `antd-vendor`: UI library (antd, @ant-design/icons, antd-style, @lobehub/ui)
+  - `antd-vendor`: UI library (antd, antd-style, @lobehub/ui)
   - `utils-vendor`: Utilities (lodash-es, zustand, query-string, url-join)
 - Prevents entire bundle invalidation when only small changes occur
 

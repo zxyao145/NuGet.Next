@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Image, Typography, List, Tag } from "antd";
-import { DownloadOutlined, FlagOutlined, TagOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { Download, Flag, Tags } from "lucide-react";
 
 const { Title, Text } = Typography;
 
@@ -54,16 +54,16 @@ const PackageItem: React.FC<PackageItemProps> = ({ packageItem }) => {
         </div>
         <List className="info">
           <List.Item>
-            <DownloadOutlined />
+            <Download size={14} />
             <Text>{packageItem.totalDownloads?.toLocaleString()} total downloads</Text>
           </List.Item>
           <List.Item>
-            <FlagOutlined />
+            <Flag />
             <Text>Latest version: {packageItem.version}</Text>
           </List.Item>
           {packageItem.tags?.length > 0 && (
             <List.Item>
-              <TagOutlined />
+              <Tags />
               {packageItem.tags.map((tag) => (
                 <Tag key={tag}>{tag}</Tag>
               ))}

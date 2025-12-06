@@ -6,8 +6,8 @@ import { Button, Card, Descriptions, Tag, Upload, message } from "antd";
 import JSZip from "jszip";
 import { Flexbox } from "react-layout-kit";
 import { useNavigate } from "react-router-dom";
-import { InboxOutlined } from "@ant-design/icons";
 import { PutPackage } from "@/services/PackageService";
+import { Inbox } from "lucide-react";
 const { Dragger } = Upload;
 
 interface Dependency {
@@ -188,7 +188,7 @@ const UploadPage = memo(() => {
           multiple={false}
         >
           <p className="ant-upload-drag-icon">
-            <InboxOutlined />
+            <Inbox size={36} />
           </p>
           <p className="ant-upload-text">点击或拖动文件到此区域上传</p>
           <p className="ant-upload-hint">浏览或拖放文件选择包（.nupkg）或符号包（.snupkg）…</p>

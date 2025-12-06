@@ -23,3 +23,8 @@ article p a {
   display: block;
   height: 100%;
 }
+
+ul.statistics > li > svg {
+  top: 2px;
+  position: relative;
+}

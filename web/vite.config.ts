@@ -19,7 +19,6 @@ export default defineConfig({
       'react-dom',
       'react-router-dom',
       'antd',
-      '@ant-design/icons',
       'zustand',
       'lodash-es'
     ],
@@ -40,7 +39,7 @@ export default defineConfig({
           // Vendor chunk for React ecosystem
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           // UI library chunk
-          'antd-vendor': ['antd', '@ant-design/icons', 'antd-style', '@lobehub/ui'],
+          'antd-vendor': ['antd', 'antd-style', '@lobehub/ui'],
           // Utilities chunk
           'utils-vendor': ['lodash-es', 'zustand', 'query-string', 'url-join']
         },

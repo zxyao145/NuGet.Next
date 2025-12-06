@@ -29,7 +29,9 @@ const PanelContent = memo<{ closePopover: () => void }>(({ closePopover }) => {
   };
 
   const handleSignOut = () => {
-    signOut();
+    if(signOut){
+      signOut();
+    }
     closePopover();
     navigate("/login");
   };

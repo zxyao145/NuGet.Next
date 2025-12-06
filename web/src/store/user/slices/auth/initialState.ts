@@ -4,7 +4,7 @@ export interface UserAuthState {
   // clerkOpenUserProfile?: (props?: any) => void;
   // clerkSession?: any;
   // clerkSignIn?: (props?: any) => void;
-  clerkSignOut?: () => void;
+  clerkSignOut: () => void;
   // clerkUser?: any;
   isLoaded?: boolean;
   isSignedIn: boolean;

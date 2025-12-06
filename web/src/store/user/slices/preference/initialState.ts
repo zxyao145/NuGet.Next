@@ -1,5 +1,5 @@
-import { DEFAULT_PREFERENCE } from '@/const/user';
-import { UserPreference } from '@/types/user';
+import { DEFAULT_PREFERENCE } from "@/const/user";
+import { UserPreference } from "@/types/user";
 
 export interface UserPreferenceState {
   /**
@@ -11,5 +11,5 @@ export interface UserPreferenceState {
 
 export const initialPreferenceState: UserPreferenceState = {
   preference: DEFAULT_PREFERENCE,
-  theme: localStorage.getItem('theme') as "light" | "dark" | "auto" || "auto",
+  theme: (localStorage.getItem("theme") as "light" | "dark" | "auto") || "auto",
 };

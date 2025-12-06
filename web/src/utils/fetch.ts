@@ -1,17 +1,16 @@
-import { message } from 'antd';
-
+import { message } from "antd";
 
 export async function fetch(url: string, options: any) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const headers = {
     ...options.headers,
-    "X-NuGet-ApiKey": `${token}`
+    "X-NuGet-ApiKey": `${token}`,
   };
   try {
     const response = await window.fetch(url, { ...options, headers });
     if (response.status >= 200 && response.status < 300) {
       const data = await response.text();
-      if (data === '' || data === null) {
+      if (data === "" || data === null) {
         return null;
       }
       return JSON.parse(data);
@@ -23,8 +22,8 @@ export async function fetch(url: string, options: any) {
 
     // 如果是401，跳转到登录页
     if (response.status === 401) {
-      if (typeof window === 'undefined') return;
-      window.location.href = '/login';
+      if (typeof window === "undefined") return;
+      window.location.href = "/login";
     }
 
     if (response.status === 400) {
@@ -33,12 +32,12 @@ export async function fetch(url: string, options: any) {
       message.error(data.message);
       throw new Error(data);
     } else if (response.status === 404) {
-      message.error('请求的资源不存在');
+      message.error("请求的资源不存在");
       const data = await response.json();
       message.error(data.message);
       throw new Error(data);
     } else if (response.status === 500) {
-      message.error('服务器错误');
+      message.error("服务器错误");
       const data = await response.json();
       message.error(data.message);
       throw new Error(data);
@@ -46,23 +45,22 @@ export async function fetch(url: string, options: any) {
 
     const error = new Error();
     throw error;
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw error;
   }
 }
 
 export async function fetchRaw(url: string, data: any) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const headers = {
     "X-NuGet-ApiKey": `${token}`,
-    'Content-Type': 'application/json',
-
+    "Content-Type": "application/json",
   };
   try {
     const response = await window.fetch(url, {
       headers,
-      method: 'POST',
-      body: JSON.stringify(data)
+      method: "POST",
+      body: JSON.stringify(data),
     });
 
     if (response.ok === false) {
@@ -94,47 +92,46 @@ export async function fetchRaw(url: string, data: any) {
 
 export const get = (url: string, options?: any) => {
   return fetch(url, {
-    method: 'GET',
-    ...options
+    method: "GET",
+    ...options,
   });
 };
 
 export const post = (url: string, options?: any) => {
   return fetch(url, {
-    method: 'POST',
-    ...options
+    method: "POST",
+    ...options,
   });
 };
 
-export const postJson = (url: string, data: any) => {
+export const postJson = (url: string, data: unknown) => {
   return post(url, {
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
-}
+};
 
 export const put = (url: string, options?: any) => {
   return fetch(url, {
-    method: 'PUT',
-    ...options
+    method: "PUT",
+    ...options,
   });
 };
 
 export const putJson = (url: string, data: any) => {
   return put(url, {
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
-
-}
+};
 
 export const del = (url: string, options?: any) => {
   return fetch(url, {
-    method: 'DELETE',
-    ...options
+    method: "DELETE",
+    ...options,
   });
 };

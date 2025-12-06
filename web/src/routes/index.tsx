@@ -20,88 +20,88 @@ import CurrentPackage from "@/app/current-package";
 import ChangePassword from "@/app/change-password";
 
 const routes = [
-    {
-        element: <MainLayout />,
-        children: [
-            {
-                element: <Welcome />,
-                path: "/",
-            },
-            {
-                element: <Packages />,
-                path: "/packages",
-            },
-            {
-                element: <PackageDetails />,
-                path: "/packages/:id/:version",
-            },
-            {
-                element: <PackageDetails />,
-                path: "/packages/:id",
-            },
-            {
-                element: <Upload />,
-                path: "/upload",
-            },
-            {
-                element: <CommonHistory />,
-                path: "/common-history",
-            },
-            {
-                element: <KeyManager />,
-                path: "/key-manager",
-            },
-            {
-                element: <DocsPage />,
-                path: "/docs",
-            },
-            {
-                element: <AboutPage />,
-                path: "/about",
-            },
-            {
-                element: <PrivacyPage />,
-                path: "/privacy",
-            },
-            {
-                element: <CurrentPackage />,
-                path: "/current-package",
-            },
-            {
-                element: <ChangePassword />,
-                path: "/change-password",
-            }
-        ],
-    },
-    {
-        element: <AdminLayout></AdminLayout>,
-        children: [
-            {
-                path: "/admin",
-                element: <AdminWelcome />
-            },
-            {
-                path: "/admin/user-management",
-                element: <UserManagement />
-            },
-            {
-                path: "/admin/common-history",
-                element: <AdminCommonHistory />
-            },
-            {
-                path: "/admin/settings",
-                element: <AdminSettings />
-            },
-            {
-                path: "/admin/package-management",
-                element: <PackageManagementPage />
-            }
-        ]
-    },
-    {
-        path: "/login",
-        element: <LoginPage />,
-    }
+  {
+    element: <MainLayout />,
+    children: [
+      {
+        element: <Welcome />,
+        path: "/",
+      },
+      {
+        element: <Packages />,
+        path: "/packages",
+      },
+      {
+        element: <PackageDetails />,
+        path: "/packages/:id/:version",
+      },
+      {
+        element: <PackageDetails />,
+        path: "/packages/:id",
+      },
+      {
+        element: <Upload />,
+        path: "/upload",
+      },
+      {
+        element: <CommonHistory />,
+        path: "/common-history",
+      },
+      {
+        element: <KeyManager />,
+        path: "/key-manager",
+      },
+      {
+        element: <DocsPage />,
+        path: "/docs",
+      },
+      {
+        element: <AboutPage />,
+        path: "/about",
+      },
+      {
+        element: <PrivacyPage />,
+        path: "/privacy",
+      },
+      {
+        element: <CurrentPackage />,
+        path: "/current-package",
+      },
+      {
+        element: <ChangePassword />,
+        path: "/change-password",
+      },
+    ],
+  },
+  {
+    element: <AdminLayout></AdminLayout>,
+    children: [
+      {
+        path: "/admin",
+        element: <AdminWelcome />,
+      },
+      {
+        path: "/admin/user-management",
+        element: <UserManagement />,
+      },
+      {
+        path: "/admin/common-history",
+        element: <AdminCommonHistory />,
+      },
+      {
+        path: "/admin/settings",
+        element: <AdminSettings />,
+      },
+      {
+        path: "/admin/package-management",
+        element: <PackageManagementPage />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
 ] as RouteObject[];
 
 const browserRoutes = createBrowserRouter(routes);

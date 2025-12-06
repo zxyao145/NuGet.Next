@@ -1,12 +1,9 @@
 import { memo } from "react";
 
 const MobileLayout = memo(() => {
-    return (
-        <div>
-        </div>
-    )
-})
+  return <div></div>;
+});
 
-MobileLayout.displayName = 'MobileLayout'
+MobileLayout.displayName = "MobileLayout";
 
 export default MobileLayout;

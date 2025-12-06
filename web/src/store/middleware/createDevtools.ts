@@ -1,6 +1,5 @@
-import { optionalDevtools } from 'zustand-utils';
-import { devtools as _devtools } from 'zustand/middleware';
-
+import { optionalDevtools } from "zustand-utils";
+import { devtools as _devtools } from "zustand/middleware";
 
 export const createDevtools =
   (name: string): typeof _devtools =>
@@ -8,9 +7,9 @@ export const createDevtools =
     let showDevtools = false;
 
     // check url to show devtools
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
-      const debug = url.searchParams.get('debug');
+      const debug = url.searchParams.get("debug");
       if (debug?.includes(name)) {
         showDevtools = true;
       }

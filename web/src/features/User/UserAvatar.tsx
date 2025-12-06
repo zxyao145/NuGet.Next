@@ -1,10 +1,10 @@
-import { Avatar, type AvatarProps } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { forwardRef } from 'react';
+import { Avatar, type AvatarProps } from "@lobehub/ui";
+import { createStyles } from "antd-style";
+import { forwardRef } from "react";
 
-import { DEFAULT_USER_AVATAR } from '@/const/meta';
-import { useUserStore } from '@/store/user';
-import { authSelectors, userProfileSelectors } from '@/store/user/selectors';
+import { DEFAULT_USER_AVATAR } from "@/const/meta";
+import { useUserStore } from "@/store/user";
+import { authSelectors, userProfileSelectors } from "@/store/user/selectors";
 
 const useStyles = createStyles(({ css, token }) => ({
   clickable: css`
@@ -12,7 +12,7 @@ const useStyles = createStyles(({ css, token }) => ({
     transition: all 200ms ease-out 0s;
 
     &::before {
-      content: '';
+      content: "";
 
       position: absolute;
       transform: skewX(-45deg) translateX(-400%);
@@ -54,13 +54,13 @@ const UserAvatar = forwardRef<HTMLDivElement, UserAvatarProps>(
 
     return (
       <Avatar
-        alt={isSignedIn ? (username as string) : 'NuGet Next'}
+        alt={isSignedIn ? (username as string) : "NuGet Next"}
         avatar={isSignedIn ? avatar || DEFAULT_USER_AVATAR : DEFAULT_USER_AVATAR}
         background={isSignedIn && avatar ? background : undefined}
         className={cx(clickable && styles.clickable, className)}
         ref={ref}
         size={size}
-        style={{ flex: 'none', ...style }}
+        style={{ flex: "none", ...style }}
         unoptimized
         {...rest}
       />
@@ -68,6 +68,6 @@ const UserAvatar = forwardRef<HTMLDivElement, UserAvatarProps>(
   },
 );
 
-UserAvatar.displayName = 'UserAvatar';
+UserAvatar.displayName = "UserAvatar";
 
 export default UserAvatar;

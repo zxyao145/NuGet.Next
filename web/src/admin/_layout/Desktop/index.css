@@ -1,9 +1,8 @@
 .admin-layout .ant-layout-sider {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 .admin-layout .ant-menu-item-selected {
-    background: rgb(23, 131, 194) !important;
-    transition: all 0.3s;
-
+  background: rgb(23, 131, 194) !important;
+  transition: all 0.3s;
 }

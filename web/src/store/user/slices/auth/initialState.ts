@@ -1,5 +1,4 @@
-
-import { User } from '@/types/user';
+import { User } from "@/types/user";
 
 export interface UserAuthState {
   clerkOpenUserProfile?: (props?: any) => void;
@@ -13,7 +12,7 @@ export interface UserAuthState {
 }
 
 function userInfo() {
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem("user");
   if (user) {
     return JSON.parse(user);
   }
@@ -21,6 +20,6 @@ function userInfo() {
 }
 
 export const initialAuthState: UserAuthState = {
-  isSignedIn: localStorage.getItem('token') ? true : false,
-  user: userInfo()
+  isSignedIn: localStorage.getItem("token") ? true : false,
+  user: userInfo(),
 };

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // 假设你使用的是react-router
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // 假设你使用的是react-router
 
-import { SidebarTabKey } from '@/store/global/initialState';
+import { SidebarTabKey } from "@/store/global/initialState";
 
 export const useActiveTabKey = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ export const useActiveTabKey = () => {
 
   useEffect(() => {
     const pathname = location.pathname;
-    const foundKey = pathname.split('/').find(Boolean) as SidebarTabKey;
+    const foundKey = pathname.split("/").find(Boolean) as SidebarTabKey;
     setActiveTabKey(foundKey);
   }, [location.pathname]);
 

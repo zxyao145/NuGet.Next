@@ -1,6 +1,5 @@
-
-import { get } from "@/utils/fetch"
+import { get } from "@/utils/fetch";
 
 export const getPanelData = () => {
-    return get('/api/v3/panel')
-}
+  return get("/api/v3/panel");
+};

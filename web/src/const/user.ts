@@ -1,4 +1,4 @@
-import { UserPreference } from '@/types/user';
+import { UserPreference } from "@/types/user";
 
 export const DEFAULT_PREFERENCE: UserPreference = {
   guide: {

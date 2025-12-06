@@ -1,18 +1,18 @@
-import type { StateCreator } from 'zustand/vanilla';
+import type { StateCreator } from "zustand/vanilla";
 
-import type { UserStore } from '@/store/user';
-import { UserGuide, UserPreference } from '@/types/user';
-import { merge } from '@/utils/merge';
+import type { UserStore } from "@/store/user";
+import { UserGuide, UserPreference } from "@/types/user";
+import { merge } from "@/utils/merge";
 
 export interface PreferenceAction {
   updateGuideState: (guide: Partial<UserGuide>) => Promise<void>;
   updatePreference: (preference: Partial<UserPreference>, action?: any) => Promise<void>;
-  setTheme: (theme: 'light' | 'dark' | 'auto') => void;
+  setTheme: (theme: "light" | "dark" | "auto") => void;
 }
 
 export const createPreferenceSlice: StateCreator<
   UserStore,
-  [['zustand/devtools', never]],
+  [["zustand/devtools", never]],
   [],
   PreferenceAction
 > = (set, get) => ({
@@ -31,6 +31,6 @@ export const createPreferenceSlice: StateCreator<
   },
   setTheme: (theme) => {
     set({ theme });
-    localStorage.setItem('theme', theme);
-  }
+    localStorage.setItem("theme", theme);
+  },
 });

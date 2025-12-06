@@ -1,6 +1,6 @@
-import { StateCreator } from 'zustand/vanilla';
+import { StateCreator } from "zustand/vanilla";
 
-import { UserStore } from '../../store';
+import { UserStore } from "../../store";
 
 export interface UserAuthAction {
   /**
@@ -21,14 +21,14 @@ export const createAuthSlice: StateCreator<
   UserAuthAction
 > = (set) => ({
   logout: async () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     set({ isSignedIn: false });
   },
   openLogin: async (token: string) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     // 解析jwt token，获取用户信息
-    const user = JSON.parse(atob(token.split('.')[1]));
-    localStorage.setItem('user', user.User);
+    const user = JSON.parse(atob(token.split(".")[1]));
+    localStorage.setItem("user", user.User);
 
     set({ isSignedIn: true, user: JSON.parse(user.User) });
   },

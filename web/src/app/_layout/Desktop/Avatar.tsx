@@ -1,13 +1,13 @@
-import { ActionIcon } from '@lobehub/ui';
-import { Tooltip } from 'antd';
-import { LucideX } from 'lucide-react';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon } from "@lobehub/ui";
+import { Tooltip } from "antd";
+import { LucideX } from "lucide-react";
+import { memo } from "react";
+import { Flexbox } from "react-layout-kit";
 
-import UserAvatar from '@/features/User/UserAvatar';
-import UserPanel from '@/features/User/UserPanel';
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors } from '@/store/user/selectors';
+import UserAvatar from "@/features/User/UserAvatar";
+import UserPanel from "@/features/User/UserPanel";
+import { useUserStore } from "@/store/user";
+import { preferenceSelectors } from "@/store/user/selectors";
 
 const Avatar = memo(() => {
   const hideSettingsMoveGuide = useUserStore(preferenceSelectors.hideSettingsMoveGuide);
@@ -22,20 +22,20 @@ const Avatar = memo(() => {
     content
   ) : (
     <Tooltip
-      color={'blue'}
+      color={"blue"}
       open
-      placement={'right'}
-      prefixCls={'guide'}
+      placement={"right"}
+      prefixCls={"guide"}
       title={
-        <Flexbox align={'center'} gap={8} horizontal>
+        <Flexbox align={"center"} gap={8} horizontal>
           <ActionIcon
             icon={LucideX}
             onClick={() => {
               updateGuideState({ moveSettingsToAvatar: true });
             }}
-            role={'close-guide'}
-            size={'small'}
-            style={{ color: 'inherit' }}
+            role={"close-guide"}
+            size={"small"}
+            style={{ color: "inherit" }}
           />
         </Flexbox>
       }
@@ -45,6 +45,6 @@ const Avatar = memo(() => {
   );
 });
 
-Avatar.displayName = 'Avatar';
+Avatar.displayName = "Avatar";
 
 export default Avatar;

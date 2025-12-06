@@ -1,6 +1,6 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from "react";
 
-import { isMobileDevice } from '@/utils/responsive';
+import { isMobileDevice } from "@/utils/responsive";
 
 interface ServerLayoutProps<T> {
   Desktop: FC<T>;
@@ -14,6 +14,6 @@ const ServerLayout =
     return mobile ? <Mobile {...props} /> : <Desktop {...props} />;
   };
 
-ServerLayout.displayName = 'ServerLayout';
+ServerLayout.displayName = "ServerLayout";
 
 export default ServerLayout;

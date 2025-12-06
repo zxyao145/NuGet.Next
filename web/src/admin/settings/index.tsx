@@ -1,6 +1,5 @@
-
 const AdminSettings = () => {
-    return <div>AdminSettings</div>;
-}
+  return <div>AdminSettings</div>;
+};
 
 export default AdminSettings;

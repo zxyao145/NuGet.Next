@@ -1,6 +1,6 @@
-import { Menu as AntdMenu, MenuProps as AntdMenuProps, ConfigProvider } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
+import { Menu as AntdMenu, MenuProps as AntdMenuProps, ConfigProvider } from "antd";
+import { createStyles } from "antd-style";
+import { memo } from "react";
 
 const useStyles = createStyles(({ css, token, prefixCls }) => ({
   compact: css`
@@ -59,11 +59,11 @@ const useStyles = createStyles(({ css, token, prefixCls }) => ({
 }));
 
 export interface MenuProps extends AntdMenuProps {
-  variant?: 'default' | 'compact';
+  variant?: "default" | "compact";
 }
 
 const Menu = memo<MenuProps>(({ className, selectable = false, variant, ...rest }) => {
-  const isCompact = variant === 'compact';
+  const isCompact = variant === "compact";
   const { cx, styles, theme } = useStyles();
   return (
     <ConfigProvider

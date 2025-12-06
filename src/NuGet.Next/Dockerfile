@@ -11,8 +11,7 @@ RUN npm config set registry https://registry.npmmirror.com \
 
 WORKDIR /src
 COPY web .
-RUN pnpm i
-RUN pnpm run build
+RUN pnpm i && pnpm run build
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release

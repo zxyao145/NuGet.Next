@@ -65,7 +65,7 @@ const PackageList = memo(() => {
         }}
         dataSource={packages}
         loading={loading}
-        renderItem={(item: any) => <PackageItem key={item.id} packageItem={item} />}
+        renderItem={(item: PackageItem) => <PackageItem key={item.id} packageItem={item} />}
       />
       <Pagination
         showTitle

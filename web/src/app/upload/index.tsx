@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 
 import { useUserStore } from "@/store/user";
 import { Button, Card, Descriptions, Tag, Upload, message } from "antd";
@@ -26,7 +26,17 @@ interface PackageInfo {
   tags?: string[];
   licenseUrl?: string;
   projectUrl?: string;
-  frameworkReferences?: string[];
+  frameworkReferences?: FrameworkReference[];
+}
+
+interface FrameworkReferenceItem {
+  name: string | null;
+  version: string | null;
+}
+
+interface FrameworkReference {
+  targetFramework: string | null;
+  references: FrameworkReferenceItem[];
 }
 
 const UploadPage = memo(() => {
@@ -39,14 +49,14 @@ const UploadPage = memo(() => {
     if (!isSignedIn) {
       navigate("/login");
     }
-  }, []);
+  }, [isSignedIn, navigate]);
 
-  const beforeUpload = (file: File) => {
-    const isNuGet = file.name.endsWith(".nupkg") || file.name.endsWith(".snupkg");
+  const beforeUpload = (uploadFile: File) => {
+    const isNuGet = uploadFile.name.endsWith(".nupkg") || uploadFile.name.endsWith(".snupkg");
     if (!isNuGet) {
       message.error("You can only upload NuGet files!");
     } else {
-      setFile(file);
+      setFile(uploadFile);
     }
     return false;
   };
@@ -54,10 +64,10 @@ const UploadPage = memo(() => {
   /**
    * 解析Nuget
    */
-  async function parseNuget(file: File) {
+  const parseNuget = useCallback(async (nugetFile: File) => {
     try {
       const zip = new JSZip();
-      const content = await file.arrayBuffer();
+      const content = await nugetFile.arrayBuffer();
       const unzipped = await zip.loadAsync(content);
 
       // Here we are just logging the files in the NuGet package
@@ -110,11 +120,11 @@ const UploadPage = memo(() => {
         });
 
         // frameworkReferences
-        const frameworkReferences: any = [];
+        const frameworkReferences: FrameworkReference[] = [];
         metadata.querySelectorAll("frameworkReferences").forEach((frameworkReference) => {
           frameworkReference.querySelectorAll("group").forEach((group) => {
             const targetFramework = group.getAttribute("targetFramework");
-            const references: any = [];
+            const references: FrameworkReferenceItem[] = [];
             group.querySelectorAll("frameworkReference").forEach((reference) => {
               references.push({
                 name: reference.getAttribute("name"),
@@ -144,13 +154,13 @@ const UploadPage = memo(() => {
     } catch (error) {
       console.error("Error reading the NuGet package", error);
     }
-  }
+  }, []);
 
   useEffect(() => {
     if (file) {
       parseNuget(file);
     }
-  }, [file]);
+  }, [file, parseNuget]);
 
   function uploadPackage() {
     // 上传包
@@ -237,7 +247,7 @@ const UploadPage = memo(() => {
             </Descriptions.Item>
             <Descriptions.Item label="依赖项">
               {item.dependencies &&
-                item.dependencies.map((dep: any, index: number) => (
+                item.dependencies.map((dep, index: number) => (
                   <div key={index} style={{ marginLeft: "20px" }}>
                     <span
                       onClick={() => {
@@ -258,7 +268,7 @@ const UploadPage = memo(() => {
             </Descriptions.Item>
             <Descriptions.Item label="框架引用">
               {item.frameworkReferences &&
-                item.frameworkReferences.map((ref: any, index: number) => (
+                item.frameworkReferences.map((ref, index: number) => (
                   <div key={index} style={{ marginLeft: "20px" }}>
                     <div>
                       <strong>目标框架:</strong> {ref.targetFramework}
@@ -266,7 +276,7 @@ const UploadPage = memo(() => {
                     <div>
                       <strong>引用:</strong>{" "}
                       {ref.references &&
-                        ref.references.map((reference: any, refIndex: number) => (
+                        ref.references.map((reference, refIndex: number) => (
                           <div key={refIndex} style={{ marginLeft: "20px" }}>
                             <div>
                               <strong>名称:</strong> {reference.name}

@@ -1,11 +1,11 @@
 import { User } from "@/types/user";
 
 export interface UserAuthState {
-  clerkOpenUserProfile?: (props?: any) => void;
-  clerkSession?: any;
-  clerkSignIn?: (props?: any) => void;
-  clerkSignOut?: any;
-  clerkUser?: any;
+  // clerkOpenUserProfile?: (props?: any) => void;
+  // clerkSession?: any;
+  // clerkSignIn?: (props?: any) => void;
+  clerkSignOut?: () => void;
+  // clerkUser?: any;
   isLoaded?: boolean;
   isSignedIn: boolean;
   user?: User;

@@ -6,7 +6,16 @@ import { merge } from "@/utils/merge";
 
 export interface PreferenceAction {
   updateGuideState: (guide: Partial<UserGuide>) => Promise<void>;
-  updatePreference: (preference: Partial<UserPreference>, action?: any) => Promise<void>;
+  updatePreference: (
+    preference: Partial<UserPreference>,
+    action?:
+      | string
+      | {
+          type: string;
+          [x: string | number | symbol]: unknown;
+        }
+      | undefined,
+  ) => Promise<void>;
   setTheme: (theme: "light" | "dark" | "auto") => void;
 }
 

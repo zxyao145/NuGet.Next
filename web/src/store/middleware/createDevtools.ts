@@ -15,7 +15,6 @@ export const createDevtools =
       }
     }
 
-    // @ts-ignore
     return optionalDevtools(showDevtools)(initializer, {
       name: `NuGetNext_${name}`,
     });

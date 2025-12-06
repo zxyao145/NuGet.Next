@@ -79,6 +79,15 @@ export interface DependencyModel {
   versionSpec: string;
 }
 
+export interface PackageVersion {
+  version: {
+    version: string; // 最内层版本号
+  };
+  downloads: number;
+  lastUpdated: string | Date;
+  selected?: boolean;
+}
+
 export interface PackageDetailsState {
   iconUrl?: string;
   licenseUrl?: string;
@@ -92,7 +101,7 @@ export interface PackageDetailsState {
   usedBy: PackageDependent[];
   dependencyGroups: DependencyGroupModel[];
   readme: string;
-  versions: any[];
+  versions: PackageVersion[];
 }
 
 export interface PackageUpdateRecordResponse {

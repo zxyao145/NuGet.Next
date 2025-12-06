@@ -1,6 +1,6 @@
 import { Header, ThemeSwitch, Tabs } from "@lobehub/ui";
 import { LogoFlat } from "@lobehub/ui/brand";
-import { memo, useEffect, useState } from "react";
+import { memo, useMemo } from "react";
 import Avatar from "./Avatar";
 import { useNavigate } from "react-router-dom";
 import { useActiveTabKey } from "@/hooks/useActiveTabKey";
@@ -12,42 +12,42 @@ const Top = memo(() => {
   const activeTabKey = useActiveTabKey();
   const [isSignedIn, theme, setTheme] = useUserStore((s) => [s.isSignedIn, s.theme, s.setTheme]);
 
-  const [tabs, setTabs] = useState([
-    {
-      key: "packages",
-      order: 1,
-      label: "包",
-    },
-    {
-      key: "docs",
-      order: 5,
-      label: "文档",
-    },
-  ]);
+  const tabs = useMemo(() => {
+    const base = [
+      {
+        key: "packages",
+        order: 1,
+        label: "包",
+      },
+      {
+        key: "docs",
+        order: 5,
+        label: "文档",
+      },
+    ];
 
-  useEffect(() => {
-    if (isSignedIn && tabs.length === 2) {
-      const items = [
-        {
-          key: "upload",
-          label: "上传",
-          order: 2,
-        },
-        {
-          key: "key-manager",
-          label: "密钥管理",
-          order: 3,
-        },
-        {
-          key: "current-package",
-          label: "包管理",
-          order: 4,
-        },
-      ];
+    if (!isSignedIn) return base;
 
-      setTabs((prev) => [...prev, ...items]);
-    }
-  }, [isSignedIn, tabs.length]);
+    const authed = [
+      {
+        key: "upload",
+        label: "上传",
+        order: 2,
+      },
+      {
+        key: "key-manager",
+        label: "密钥管理",
+        order: 3,
+      },
+      {
+        key: "current-package",
+        label: "包管理",
+        order: 4,
+      },
+    ];
+
+    return [...base, ...authed];
+  }, [isSignedIn]);
 
   return (
     <Header

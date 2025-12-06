@@ -9,6 +9,13 @@ import {
 } from "@/services/UserKeyService";
 import { Snippet } from "@lobehub/ui";
 
+interface KeyProps {
+  id: string;
+  key: string;
+  createdTime: string;
+  enabled: boolean;
+}
+
 const KeyManager = memo(() => {
   const columns = [
     {
@@ -39,7 +46,7 @@ const KeyManager = memo(() => {
     {
       title: "操作",
       key: "action",
-      render: (_: any, record: any) => (
+      render: (_: unknown, record: KeyProps) => (
         <Flexbox horizontal>
           <Button
             onClick={() => {

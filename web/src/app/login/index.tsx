@@ -23,9 +23,8 @@ const LoginPage = memo(() => {
       });
       if (result.success) {
         message.success({
-          title: "登录成功",
           content: "即将跳转到首页",
-        } as any);
+        });
         setTimeout(() => {
           openLogin(result.token);
           navigate("/");
@@ -33,7 +32,9 @@ const LoginPage = memo(() => {
       } else {
         message.error(result.message);
       }
-    } catch (e) {}
+    } catch (e: unknown) {
+      console.error("login failed", e);
+    }
     setLoading(false);
   }
 

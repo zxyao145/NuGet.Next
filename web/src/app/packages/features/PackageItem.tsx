@@ -5,17 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
+interface PackageItem {
+  iconUrl: string;
+  id: string;
+  version: string;
+  authors: string[];
+  totalDownloads: number;
+  tags: string[];
+  description: string;
+  title?: string;
+}
+
 interface PackageItemProps {
-  packageItem: {
-    iconUrl: string;
-    id: string;
-    version: string;
-    authors: string[];
-    totalDownloads: number;
-    tags: string[];
-    description: string;
-    title?: string;
-  };
+  packageItem: PackageItem;
 }
 
 const PackageItem: React.FC<PackageItemProps> = ({ packageItem }) => {

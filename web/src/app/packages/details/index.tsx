@@ -311,7 +311,7 @@ const PackageDetails = () => {
                   <tbody>
                     {detail.versions.map((version, index) => (
                       <tr
-                        key={version.version}
+                        key={version.version.version}
                         className={version.selected ? "bg-info" : ""}
                         style={{
                           backgroundColor: index % 2 === 0 ? "#f9f9f9" : "#fff",

@@ -28,6 +28,6 @@ export const deleteUser = (id: string) => {
   return del(prefix + "/" + id);
 };
 
-export const updatePassword = (input: any) => {
+export const updatePassword = (input: unknown) => {
   return putJson(prefix + "/update-password", input);
 };

@@ -31,14 +31,14 @@ export const useQueryRoute = () => {
   return useMemo(
     () => ({
       push: (url: string, options: QueryRouteOptions = {}) => {
-        // @ts-ignore
+        // @ts-expect-error navigate expects To type; stringified query string is valid runtime path
         return navigate(genHref({ prevQuery, url, ...options }));
       },
       replace: (url: string, options: QueryRouteOptions = {}) => {
-        // @ts-ignore
+        // @ts-expect-error navigate expects To type; stringified query string is valid runtime path
         return navigate(genHref({ prevQuery, url, ...options }), { replace: true });
       },
     }),
-    [prevQuery],
+    [prevQuery, navigate],
   );
 };

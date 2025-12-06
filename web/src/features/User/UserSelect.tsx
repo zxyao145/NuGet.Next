@@ -40,7 +40,7 @@ const UserSelect = ({ value, onChange, width, ...props }: UserSelectProps) => {
       {...props}
       value={value}
       onChange={(v) => {
-        onChange && onChange(v);
+        if (onChange) onChange(v);
       }}
       loading={loading}
       placeholder="选择用户"

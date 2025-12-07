@@ -4,14 +4,16 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM node:22-alpine AS lobe
+
+FROM node:22-alpine AS web
 RUN npm config set registry https://registry.npmmirror.com \
     && npm install -g pnpm \
     && pnpm config set registry https://registry.npmmirror.com
 
 WORKDIR /src
-COPY web .
+COPY webv2 .
 RUN pnpm i && pnpm run build
+
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -38,5 +40,5 @@ RUN dotnet publish "NuGet.Next.csproj" -c $BUILD_CONFIGURATION -o /app/publish /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=lobe /src/dist ./wwwroot
+COPY --from=web /src/dist ./wwwroot
 ENTRYPOINT ["dotnet", "NuGet.Next.dll"]

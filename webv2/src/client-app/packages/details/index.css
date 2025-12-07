@@ -1,0 +1,41 @@
+.ant-image img {
+  display: flex;
+  /* 使用 flexbox 以居中显示 */
+  justify-content: center;
+  /* 水平居中 */
+  align-items: center;
+  /* 垂直居中 */
+}
+
+.markdown .ant-image .ant-image-img {
+  max-width: auto !important;
+  max-height: auto !important;
+  /* 图片最大宽高 */
+  display: flex;
+  height: auto !important;
+  width: auto !important;
+  justify-content: center;
+  align-items: center;
+}
+
+article p a {
+  width: 100% !important;
+  display: block;
+  height: 100%;
+}
+
+.statistics {
+  list-style: unset;
+  margin-left: 20px;
+}
+
+.statistics > li {
+  font-size: 14px;
+  display: list-item;
+}
+
+.statistics > li > svg {
+  display: inline-block;
+  position: relative;
+  margin-right: 4px;
+}

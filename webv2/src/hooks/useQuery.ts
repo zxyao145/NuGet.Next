@@ -1,0 +1,18 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export const useQuery = () => {
+  const searchParams = useSearchParams();
+  return {
+    q: decodeURIComponent(searchParams.get("q") ?? ""),
+    packageType: searchParams.get("packageType"),
+    framework: searchParams.get("framework"),
+    prerelease:
+      searchParams.get("prerelease") === "true"
+        ? true
+        : searchParams.get("prerelease") === "false"
+          ? false
+          : undefined,
+  };
+};

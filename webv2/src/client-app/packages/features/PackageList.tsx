@@ -7,6 +7,7 @@ import { Flexbox } from "react-layout-kit";
 import PackageItem from "./PackageItem";
 import { Search } from "@/services/SearchService";
 import { useQuery } from "@/hooks/useQuery";
+import { Spinner } from "@/components/ui/spinner";
 
 const PackageList = memo(() => {
   const [packages, setPackages] = useState([]);
@@ -42,6 +43,16 @@ const PackageList = memo(() => {
   useEffect(() => {
     loadPackages();
   }, [query.q, query.prerelease, query.packageType, skip, loadPackages]);
+
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center">
+        <div className="w-fit gap-2 p-2 rounded-md bg-gray-50 shadow flex items-center text-xl">
+          <Spinner className="size-6" /> Loading...
+        </div>
+      </div>
+    );
+  }
 
   if (packages.length === 0) {
     return (

@@ -6,7 +6,7 @@ import { Markdown } from "@lobehub/ui";
 import { memo, useEffect, useMemo, useState } from "react";
 
 import { Flexbox } from "react-layout-kit";
-import "./index.scss";
+import "./index.css";
 
 const DocsPage = memo(() => {
   const [menu, setMenu] = useState("quick-start");

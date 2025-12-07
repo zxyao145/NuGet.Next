@@ -1,0 +1,7 @@
+body {
+  overflow: hidden;
+  margin: 0;
+}
+div[role="tablist"] > button[role="tab"] {
+  cursor: pointer;
+}

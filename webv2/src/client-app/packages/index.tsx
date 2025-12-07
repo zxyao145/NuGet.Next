@@ -2,7 +2,7 @@
 
 import { useQuery } from "@/hooks/useQuery";
 import { Input } from "@lobehub/ui";
-import { FormEvent, Suspense, memo, useEffect, useState } from "react";
+import { Suspense, memo, useEffect, useState } from "react";
 import { Button } from "antd";
 import { Flexbox } from "react-layout-kit";
 import { useRouter } from "next/navigation";
@@ -15,10 +15,10 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { CheckboxProps } from "@radix-ui/react-checkbox";
-
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 
 const frameworks = [
   {
@@ -233,102 +233,103 @@ const PackagesContent = memo(() => {
     <Flexbox padding="20px" gap={2}>
       <div>
         <Input
+          className="py-0 shadow"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           suffix={<Button type="text">🔍</Button>}
           placeholder="搜索包..."
         />
       </div>
-      <Flexbox
-        horizontal
-        style={{
-          marginTop: 8,
-        }}
-      >
-        <span
-          style={{
-            marginRight: 8,
-            textAlign: "center",
-            fontSize: 18,
-            marginTop: 5,
-          }}
-        >
-          包类型:
-        </span>
-        <Select
-          value={packageType}
-          onValueChange={(v) => {
-            setPackageType(v as string);
-          }}
-        >
-          <SelectTrigger className="w-[150px]">
-            <SelectValue placeholder="Package type: " />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="Any">Any</SelectItem>
-              <SelectItem value="dependency">Dependency</SelectItem>
-              <SelectItem value="dotnettool">.NET Tool</SelectItem>
-              <SelectItem value="dotnettemplate">Template</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <span
-          style={{
-            marginRight: 8,
-            textAlign: "center",
-            fontSize: 18,
-            marginLeft: 8,
-            marginTop: 5,
-          }}
-        >
-          框架类型:
-        </span>
-        <Select
-          value={framework}
-          onValueChange={(v) => {
-            setFramework(v as string);
-          }}
-        >
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="Framework: " />
-          </SelectTrigger>
-          <SelectContent>
-            {frameworks.map((framework) =>
-              framework.options ? (
-                <SelectGroup key={framework.label}>
-                  <SelectLabel>{framework.title}</SelectLabel>
-                  {framework.options.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
-                  ))}
-                </SelectGroup>
-              ) : (
-                <SelectGroup key={framework.label}>
-                  <SelectLabel>{framework.title}</SelectLabel>
-                  <SelectItem value={framework.label}>{framework.value}</SelectItem>
-                </SelectGroup>
-              ),
-            )}
-          </SelectContent>
-        </Select>
+      <Flexbox horizontal className="gap-2 mt-4">
+        <div className="flex flex-row justify-center items-center">
+          <span
+            style={{
+              marginRight: 8,
+              textAlign: "center",
+              fontSize: 18,
+              marginTop: 5,
+            }}
+          >
+            包类型:
+          </span>
+          <Select
+            value={packageType}
+            onValueChange={(v) => {
+              setPackageType(v as string);
+            }}
+          >
+            <SelectTrigger className="w-[150px]">
+              <SelectValue placeholder="Package type: " />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="Any">Any</SelectItem>
+                <SelectItem value="dependency">Dependency</SelectItem>
+                <SelectItem value="dotnettool">.NET Tool</SelectItem>
+                <SelectItem value="dotnettemplate">Template</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
 
+        <div className="flex flex-row justify-center items-center">
+          <span
+            style={{
+              marginRight: 8,
+              textAlign: "center",
+              fontSize: 18,
+              marginLeft: 8,
+              marginTop: 5,
+            }}
+          >
+            框架类型:
+          </span>
+          <Select
+            value={framework}
+            onValueChange={(v) => {
+              setFramework(v as string);
+            }}
+          >
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="Framework: " />
+            </SelectTrigger>
+            <SelectContent>
+              {frameworks.map((framework) =>
+                framework.options ? (
+                  <SelectGroup key={framework.label}>
+                    <SelectLabel>{framework.title}</SelectLabel>
+                    {framework.options.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                ) : (
+                  <SelectGroup key={framework.label}>
+                    <SelectLabel>{framework.title}</SelectLabel>
+                    <SelectItem value={framework.label}>{framework.value}</SelectItem>
+                  </SelectGroup>
+                ),
+              )}
+            </SelectContent>
+          </Select>
+        </div>
         <div
+          className="flex flex-row items-center justify-center gap-1"
           onClick={() => {
             setPrerelease(!prerelease);
           }}
         >
           <Checkbox
-            style={{
-              marginLeft: 8,
-              marginTop: 5,
-            }}
+            id="prerelease"
             checked={prerelease}
-            onCheckedChange={(e)=>{
-              let checked = !!e;
+            onCheckedChange={(e) => {
+              const checked = !!e;
               setPrerelease(checked);
             }}
           ></Checkbox>
-          <div
+          <Label htmlFor="prerelease">包含预发行</Label>
+          {/* <div
             style={{
               marginRight: 8,
               textAlign: "center",
@@ -339,8 +340,8 @@ const PackagesContent = memo(() => {
               cursor: "pointer",
             }}
           >
-            包含预发行
-          </div>
+            
+          </div> */}
         </div>
       </Flexbox>
       <PackageList />
@@ -351,7 +352,7 @@ const PackagesContent = memo(() => {
 PackagesContent.displayName = "PackagesContent";
 
 const Packages = () => (
-  <Suspense fallback={null}>
+  <Suspense fallback={<Spinner />}>
     <PackagesContent />
   </Suspense>
 );

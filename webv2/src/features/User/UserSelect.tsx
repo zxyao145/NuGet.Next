@@ -21,7 +21,7 @@ interface UserSelectProps {
   width?: string;
 }
 
-const UserSelect = ({ value, onChange, width, ...props }: UserSelectProps) => {
+const UserSelect = ({ onChange, width, ...props }: UserSelectProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 

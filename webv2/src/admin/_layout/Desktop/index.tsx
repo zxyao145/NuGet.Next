@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./index.module.scss";
+import "./index.css";
 
 import { Header } from "@lobehub/ui";
 import { Layout, Menu } from "antd";
@@ -8,7 +8,6 @@ import { Gauge, Package, User, ChartCandlestick, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, memo, useMemo, useState } from "react";
 
-import { cn } from "@/lib/utils";
 import Avatar from "./Avatar";
 const { Content, Footer, Sider } = Layout;
 
@@ -26,7 +25,7 @@ const DesktopLayout = memo(({ children }: { children: ReactNode }) => {
 
   return (
     <Layout
-      className={cn("admin-layout", styles.adminLayout)}
+      className="admin-layout"
       style={{
         height: "100vh",
         display: "flex",

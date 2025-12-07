@@ -12,7 +12,6 @@ import {
   Children,
   cloneElement,
   forwardRef,
-  useMemo,
   useEffect,
   useState,
 } from "react";
@@ -33,14 +32,7 @@ import {
 import { toast } from "sonner";
 
 import { Button as ShadButton } from "@/components/ui/button";
-import {
-  Card as ShadCard,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Checkbox as ShadCheckbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardHeader, CardDescription } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -52,7 +44,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuCheckboxItem,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -64,14 +55,6 @@ import {
   PopoverContent as ShadPopoverContent,
   PopoverTrigger as ShadPopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select as ShadSelect,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import {
   Tabs as ShadTabs,
   TabsContent as ShadTabsContent,
@@ -88,6 +71,7 @@ import {
 import { cn } from "@/lib/utils";
 
 import { Loader2 } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export const message = {
   success: (content: string | { content: string }) =>
@@ -214,14 +198,6 @@ export const Input = Object.assign(BaseInput, {
   TextArea: Textarea,
 });
 
-
-type CheckboxProps = {
-  checked?: boolean;
-  onChange?: (e: { target: { checked: boolean } }) => void;
-  children?: ReactNode;
-  style?: CSSProperties;
-};
-
 type TabsProps = {
   defaultActiveKey?: string;
   activeKey?: string;
@@ -271,6 +247,7 @@ export const Tabs = ({
 
   return (
     <ShadTabs
+      className="gap-0"
       value={currentKey}
       defaultValue={initialKey}
       onValueChange={(val) => {
@@ -279,7 +256,7 @@ export const Tabs = ({
       }}
       style={style}
     >
-      <ShadTabsList>
+      <ShadTabsList className="gap-4">
         {tabItems.map((tab) => (
           <ShadTabsTrigger key={tab.key} value={tab.key}>
             {tab.label}
@@ -298,27 +275,6 @@ export const Tabs = ({
 Tabs.TabPane = TabPane;
 
 export const Divider = (props: HTMLAttributes<HTMLHRElement>) => <Separator {...props} />;
-
-type CardProps = Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
-  title?: ReactNode;
-  extra?: ReactNode;
-  hoverable?: boolean;
-};
-
-export const Card = ({ children, className, title, extra, hoverable, ...rest }: CardProps) => (
-  <ShadCard
-    className={cn("w-full", hoverable && "transition-shadow hover:shadow-lg", className)}
-    {...rest}
-  >
-    {(title || extra) && (
-      <CardHeader className="flex flex-row items-center justify-between space-y-0">
-        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-        {extra}
-      </CardHeader>
-    )}
-    <CardContent>{children}</CardContent>
-  </ShadCard>
-);
 
 type TagProps = {
   color?: string;

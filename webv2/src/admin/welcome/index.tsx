@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Layout, Typography, Statistic } from "antd";
 import { getPanelData } from "@/services/PanelApi";
 import { ChartColumn, Gift, Plus, UserRound } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const { Content } = Layout;
 const { Title, Paragraph } = Typography;

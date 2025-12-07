@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
-import { Select } from "antd";
 import { getUser } from "@/services/UserService";
 import { User } from "@/types/user";
 import { Avatar } from "@lobehub/ui";
 import { Flexbox } from "react-layout-kit";
 
-const { Option } = Select;
+import {
+  Select,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 
 interface UserSelectProps {
   value?: string[];
@@ -34,32 +40,41 @@ const UserSelect = ({ value, onChange, width, ...props }: UserSelectProps) => {
 
     fetchUsers();
   }, []);
+  if (loading) {
+    return (
+      <div>
+        <Spinner /> 加载中...
+      </div>
+    );
+  }
 
   return (
     <Select
       {...props}
-      value={value}
-      onChange={(v) => {
+      // value={value}
+      onValueChange={(v) => {
         if (onChange) onChange(Array.isArray(v) ? v : [v]);
       }}
-      loading={loading}
-      placeholder="选择用户"
-      style={{ width: width }}
     >
-      {users.map((user) => (
-        <Option key={user.id} value={user.id}>
-          <Flexbox horizontal>
-            <Avatar shape="circle" animation={true} size={24} avatar={user.avatar} />
-            <span
-              style={{
-                marginLeft: 8,
-              }}
-            >
-              {user.fullName}
-            </span>
-          </Flexbox>
-        </Option>
-      ))}
+      <SelectTrigger className={`w-[${width}px]`}>
+        <SelectValue placeholder="选择用户" />
+      </SelectTrigger>
+      <SelectGroup>
+        {users.map((user) => (
+          <SelectItem key={user.id} value={user.id}>
+            <Flexbox horizontal>
+              <Avatar shape="circle" animation={true} size={24} avatar={user.avatar} />
+              <span
+                style={{
+                  marginLeft: 8,
+                }}
+              >
+                {user.fullName}
+              </span>
+            </Flexbox>
+          </SelectItem>
+        ))}
+      </SelectGroup>
     </Select>
   );
 };

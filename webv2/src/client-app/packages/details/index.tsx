@@ -13,7 +13,7 @@ import { Flexbox } from "react-layout-kit";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "./index.css";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Empty,
@@ -76,7 +76,7 @@ const PackageDetails = () => {
             <span className="text-3xl font-semibold">404</span>
           </EmptyMedia>
           <EmptyTitle>抱歉，没有找到包。</EmptyTitle>
-          <EmptyDescription>找不到包 '${id}'.</EmptyDescription>
+          <EmptyDescription>{`找不到包 '${id}'.`}</EmptyDescription>
         </EmptyHeader>
 
         <EmptyContent className="w-full">

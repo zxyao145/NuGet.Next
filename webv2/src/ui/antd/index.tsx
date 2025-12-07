@@ -88,7 +88,6 @@ import {
 import { cn } from "@/lib/utils";
 
 import { Loader2 } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 export const message = {
   success: (content: string | { content: string }) =>
@@ -215,176 +214,12 @@ export const Input = Object.assign(BaseInput, {
   TextArea: Textarea,
 });
 
-type OptionProps = {
-  label?: ReactNode;
-  value?: string;
-  title?: string;
-  children?: ReactNode;
-};
-
-const SelectOption = (_props: OptionProps) => null;
-
-type SelectProps = {
-  children?: ReactNode;
-  defaultValue?: string | string[];
-  options?: (OptionProps & { options?: OptionProps[] })[];
-  style?: CSSProperties;
-  title?: string;
-  value?: string | string[];
-  mode?: "multiple" | "tags" | "combobox";
-  onSelect?: (value: string | string[]) => void;
-  onChange?: (value: string | string[]) => void;
-  loading?: boolean;
-  placeholder?: string;
-};
-
-export const Select = ({
-  children,
-  defaultValue,
-  onChange,
-  onSelect,
-  options,
-  style,
-  title,
-  value,
-  mode,
-  loading,
-  placeholder,
-}: SelectProps) => {
-  const flatOptions = useMemo<OptionProps[]>(() => {
-    if (options) {
-      return options.flatMap((opt) => (opt.options ? opt.options : opt));
-    }
-    const childOptions: OptionProps[] = [];
-    const items = children ? (Array.isArray(children) ? children : [children]) : [];
-    items.forEach((child) => {
-      const element = child as ReactElement<OptionProps>;
-      if (element?.props) {
-        childOptions.push(element.props);
-      }
-    });
-    return childOptions;
-  }, [children, options]);
-
-  const normalizedOptions = flatOptions.filter((opt): opt is OptionProps & { value: string } =>
-    Boolean(opt.value),
-  );
-
-  const isMultiple = mode === "multiple" || mode === "tags";
-
-  const initialValue = useMemo(() => {
-    if (isMultiple) {
-      if (Array.isArray(value)) return value;
-      if (Array.isArray(defaultValue)) return defaultValue;
-      if (typeof value === "string") return [value];
-      if (typeof defaultValue === "string") return [defaultValue];
-      return normalizedOptions[0]?.value ? [normalizedOptions[0].value] : [];
-    }
-    return (value as string) ?? (defaultValue as string) ?? normalizedOptions[0]?.value ?? "";
-  }, [defaultValue, isMultiple, normalizedOptions, value]);
-
-  const [internalValue, setInternalValue] = useState<string | string[]>(initialValue);
-
-  useEffect(() => {
-    setInternalValue(initialValue);
-  }, [initialValue]);
-
-  const currentValue = value ?? internalValue;
-
-  if (isMultiple) {
-    const selectedValues = Array.isArray(currentValue)
-      ? currentValue
-      : typeof currentValue === "string" && currentValue
-        ? [currentValue]
-        : [];
-
-    const selectedLabels = normalizedOptions
-      .filter((opt) => selectedValues.includes(opt.value))
-      .map((opt) => opt.label ?? opt.title ?? opt.value)
-      .join(", ");
-
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button
-            type="button"
-            disabled={loading}
-            className={cn(
-              "flex w-full items-center justify-between rounded-md border border-input px-3 py-2 text-sm",
-              !selectedValues.length && "text-muted-foreground",
-            )}
-            style={style}
-          >
-            <span className="truncate">{selectedLabels || placeholder || title}</span>
-            <span className="text-muted-foreground">▼</span>
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]">
-          {normalizedOptions.map((opt) => (
-            <DropdownMenuCheckboxItem
-              key={opt.value}
-              checked={selectedValues.includes(opt.value)}
-              onCheckedChange={(checked) => {
-                const next = checked
-                  ? [...selectedValues, opt.value]
-                  : selectedValues.filter((v) => v !== opt.value);
-                setInternalValue(next);
-                onSelect?.(next);
-                onChange?.(next);
-              }}
-            >
-              {opt.label ?? opt.title ?? opt.value}
-            </DropdownMenuCheckboxItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  }
-
-  return (
-    <div style={style}>
-      <ShadSelect
-        value={(currentValue as string) ?? ""}
-        onValueChange={(val) => {
-          setInternalValue(val);
-          onSelect?.(val);
-          onChange?.(val);
-        }}
-      >
-        <SelectTrigger aria-label={title} disabled={loading}>
-          <SelectValue placeholder={placeholder ?? title} />
-        </SelectTrigger>
-        <SelectContent>
-          {normalizedOptions.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value}>
-              {opt.label ?? opt.title ?? opt.value}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </ShadSelect>
-    </div>
-  );
-};
-
-Select.Option = SelectOption;
 
 type CheckboxProps = {
   checked?: boolean;
   onChange?: (e: { target: { checked: boolean } }) => void;
   children?: ReactNode;
   style?: CSSProperties;
-};
-
-export const Checkbox = ({ checked, children, onChange, style }: CheckboxProps) => {
-  return (
-    <label className="inline-flex cursor-pointer items-center gap-2 text-sm" style={style}>
-      <ShadCheckbox
-        checked={checked}
-        onCheckedChange={(val) => onChange?.({ target: { checked: Boolean(val) } })}
-      />
-      {children}
-    </label>
-  );
 };
 
 type TabsProps = {

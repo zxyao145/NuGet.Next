@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @next/next/no-img-element, jsx-a11y/alt-text */
 
-import { ReactElement, ReactNode, forwardRef, useEffect, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
@@ -127,9 +127,7 @@ export const Input = AntdInput;
 export const Markdown = ({
   allowHtml = true,
   children,
-  className,
   componentProps,
-  lineHeight,
   // compatibility props
   fullFeaturedCodeBlock,
   variant,

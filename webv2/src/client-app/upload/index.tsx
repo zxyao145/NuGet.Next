@@ -3,13 +3,14 @@
 import { memo, useCallback, useEffect, useState } from "react";
 
 import { useUserStore } from "@/store/user";
-import { Button, Card, Descriptions, Tag, Upload, message } from "antd";
+import { Button, Descriptions, Tag, Upload, message } from "antd";
 
 import JSZip from "jszip";
 import { Flexbox } from "react-layout-kit";
 import { useRouter } from "next/navigation";
 import { PutPackage } from "@/services/PackageService";
 import { Inbox } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardAction, CardContent } from "@/components/ui/card";
 const { Dragger } = Upload;
 
 interface Dependency {
@@ -198,98 +199,102 @@ const UploadPage = memo(() => {
       );
     } else {
       return (
-        <Card
-          title={<span style={{ fontWeight: "bold", fontSize: "24px" }}>{item.packageId}</span>}
-          extra={
-            <Flexbox horizontal>
-              <Button
-                style={{
-                  marginRight: "10px",
-                }}
-                type="primary"
-                onClick={() => {
-                  if (file) {
-                    uploadPackage();
-                  }
-                }}
-              >
-                上传
-              </Button>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>
+              <span style={{ fontWeight: "bold", fontSize: "24px" }}>{item.packageId}</span>
+            </CardTitle>
+            <CardAction>
+              <Flexbox horizontal>
+                <Button
+                  style={{
+                    marginRight: "10px",
+                  }}
+                  type="primary"
+                  onClick={() => {
+                    if (file) {
+                      uploadPackage();
+                    }
+                  }}
+                >
+                  上传
+                </Button>
 
-              <Button
-                type="dashed"
-                onClick={() => {
-                  setItem(null);
-                  setFile(null);
-                }}
-              >
-                重新上传
-              </Button>
-            </Flexbox>
-          }
-          style={{ width: "100%" }}
-        >
-          <Descriptions bordered column={1}>
-            <Descriptions.Item label="版本">{item.version}</Descriptions.Item>
-            <Descriptions.Item label="作者">{item.owners}</Descriptions.Item>
-            <Descriptions.Item label="描述">{item.description}</Descriptions.Item>
-            <Descriptions.Item label="标签">
-              {item.tags && item.tags.map((tag: string) => <Tag key={tag}>{tag}</Tag>)}
-            </Descriptions.Item>
-            <Descriptions.Item label="许可证">{item.license}</Descriptions.Item>
-            <Descriptions.Item label="许可证 URL">
-              <a href={item.licenseUrl} target="_blank" rel="noreferrer">
-                {item.licenseUrl}
-              </a>
-            </Descriptions.Item>
-            <Descriptions.Item label="项目 URL">
-              <a href={item.projectUrl} target="_blank" rel="noreferrer">
-                {item.projectUrl}
-              </a>
-            </Descriptions.Item>
-            <Descriptions.Item label="依赖项">
-              {item.dependencies &&
-                item.dependencies.map((dep, index: number) => (
-                  <div key={index} style={{ marginLeft: "20px" }}>
-                    <span
-                      onClick={() => {
-                        router.push(`/packages/${dep.id}`);
-                      }}
-                      style={{
-                        fontWeight: "bold",
-                        marginRight: "10px",
-                        cursor: "pointer",
-                        margin: 3,
-                      }}
-                    >
-                      {dep.id}
-                    </span>
-                    <span>{dep.version}</span>
-                  </div>
-                ))}
-            </Descriptions.Item>
-            <Descriptions.Item label="框架引用">
-              {item.frameworkReferences &&
-                item.frameworkReferences.map((ref, index: number) => (
-                  <div key={index} style={{ marginLeft: "20px" }}>
-                    <div>
-                      <strong>目标框架:</strong> {ref.targetFramework}
+                <Button
+                  type="dashed"
+                  onClick={() => {
+                    setItem(null);
+                    setFile(null);
+                  }}
+                >
+                  重新上传
+                </Button>
+              </Flexbox>
+            </CardAction>
+          </CardHeader>
+          <CardContent>
+            <Descriptions bordered column={1}>
+              <Descriptions.Item label="版本">{item.version}</Descriptions.Item>
+              <Descriptions.Item label="作者">{item.owners}</Descriptions.Item>
+              <Descriptions.Item label="描述">{item.description}</Descriptions.Item>
+              <Descriptions.Item label="标签">
+                {item.tags && item.tags.map((tag: string) => <Tag key={tag}>{tag}</Tag>)}
+              </Descriptions.Item>
+              <Descriptions.Item label="许可证">{item.license}</Descriptions.Item>
+              <Descriptions.Item label="许可证 URL">
+                <a href={item.licenseUrl} target="_blank" rel="noreferrer">
+                  {item.licenseUrl}
+                </a>
+              </Descriptions.Item>
+              <Descriptions.Item label="项目 URL">
+                <a href={item.projectUrl} target="_blank" rel="noreferrer">
+                  {item.projectUrl}
+                </a>
+              </Descriptions.Item>
+              <Descriptions.Item label="依赖项">
+                {item.dependencies &&
+                  item.dependencies.map((dep, index: number) => (
+                    <div key={index} style={{ marginLeft: "20px" }}>
+                      <span
+                        onClick={() => {
+                          router.push(`/packages/${dep.id}`);
+                        }}
+                        style={{
+                          fontWeight: "bold",
+                          marginRight: "10px",
+                          cursor: "pointer",
+                          margin: 3,
+                        }}
+                      >
+                        {dep.id}
+                      </span>
+                      <span>{dep.version}</span>
                     </div>
-                    <div>
-                      <strong>引用:</strong>{" "}
-                      {ref.references &&
-                        ref.references.map((reference, refIndex: number) => (
-                          <div key={refIndex} style={{ marginLeft: "20px" }}>
-                            <div>
-                              <strong>名称:</strong> {reference.name}
+                  ))}
+              </Descriptions.Item>
+              <Descriptions.Item label="框架引用">
+                {item.frameworkReferences &&
+                  item.frameworkReferences.map((ref, index: number) => (
+                    <div key={index} style={{ marginLeft: "20px" }}>
+                      <div>
+                        <strong>目标框架:</strong> {ref.targetFramework}
+                      </div>
+                      <div>
+                        <strong>引用:</strong>{" "}
+                        {ref.references &&
+                          ref.references.map((reference, refIndex: number) => (
+                            <div key={refIndex} style={{ marginLeft: "20px" }}>
+                              <div>
+                                <strong>名称:</strong> {reference.name}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
-            </Descriptions.Item>
-          </Descriptions>
+                  ))}
+              </Descriptions.Item>
+            </Descriptions>
+          </CardContent>
         </Card>
       );
     }

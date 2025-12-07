@@ -1,7 +1,15 @@
 import { EmojiPicker, Form, Input, Modal } from "@lobehub/ui";
-import { Button, message, Select } from "antd";
+import { Button, message } from "antd";
 import { createUser } from "@/services/UserService";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 interface CreateUserProps {
   open: boolean;
   onClose: () => void;
@@ -120,13 +128,17 @@ const CreateUser = (props: CreateUserProps) => {
           <Input />
         </Form.Item>
         <Form.Item initialValue={"user"} label="角色" name="role" required>
-          <Select
-            style={{
-              width: 200,
-            }}
-          >
-            <Select.Option value="admin">管理员</Select.Option>
-            <Select.Option value="user">用户</Select.Option>
+          <Select>
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="选择角色" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>角色</SelectLabel>
+                <SelectItem value="admin">管理员</SelectItem>
+                <SelectItem value="user">普通用户</SelectItem>
+              </SelectGroup>
+            </SelectContent>
           </Select>
         </Form.Item>
         <Button block htmlType="submit">
